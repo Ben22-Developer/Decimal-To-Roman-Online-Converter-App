@@ -1,7 +1,9 @@
+const input_output = JSON.parse(localStorage.getItem('data')) || [];
+
 const romanSymbols = [
     {
         symbol:'I', digits:1
-    },
+    }, 
     {
         symbol:'V',digits:1
     },
@@ -28,7 +30,7 @@ const calculatorLogic = (() => {
         if (!input) {
             return 'Please enter a valid number';
         }
-        else if (input < 0) {
+        else if (input <= 0) {
             return 'Please enter a number greater than or equal to 1';
         }
         else if (input > 3999) {
@@ -117,7 +119,45 @@ const calculatorLogic = (() => {
 
 })();
 
+const UImanipulation = (() => {
 
+    function outputFn (decimal,roman) {
+        input_output.splice(0);
+        input_output.push(decimal,roman);
+        document.getElementById('input').innerText = input_output[0];
+        document.getElementById('output').innerText = input_output[1];
+        storage();
+    }
+
+    function storage () {
+        const data = JSON.stringify(input_output);
+        localStorage.setItem('data',data);
+    }
+
+    function retrieve () {
+        outputFn(input_output[0],input_output[1]);
+    }
+
+    return {outputFn,retrieve}
+})()
+
+const inputDom = document.getElementById('number');
+
+if (input_output.length) {
+    UImanipulation.retrieve();
+}
 
 //DOM Manipulation
 
+document.getElementById('convert-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    const romanNbr = calculatorLogic.inputValidation(inputDom.value);
+    UImanipulation.outputFn(inputDom.value,romanNbr);
+    inputDom.value = '';
+});
+
+// document.addEventListener('keyup',() => {
+//     if (!inputDom.value) {
+//         input
+//     }
+// })
