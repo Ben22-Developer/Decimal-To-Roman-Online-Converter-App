@@ -1,11 +1,11 @@
-const input_output = JSON.parse(localStorage.getItem('data')) || [];
+const input_output = JSON.parse(localStorage.getItem('decimal_to_roman_data')) || [];
 
 const romanSymbols = [
     {
         symbol:'I', digits:1
     }, 
     {
-        symbol:'V',digits:1
+        symbol:'V',digits:1 
     },
     {
         symbol:'X',digits:2
@@ -78,11 +78,10 @@ const calculatorLogic = (() => {
         const currentSymbol = romanSymbols.filter(symbol => symbol.digits === (pow + 1)); 
 
         // 3, to facilitate  **nextSymbol
-        const lastCurrentSymbolIndex = currentSymbol.indexOf(currentSymbol[currentSymbol.length - 1]);
+        const lastCurrentSymbolIndex = romanSymbols.indexOf(currentSymbol[currentSymbol.length - 1]);
 
         //for 9,90,900 ... we use next symbol if 90 we use roman C # XC
-        const nextSymbol = romanSymbols[lastCurrentSymbolIndex + 1].symbol;
-
+        const nextSymbol = romanSymbols[lastCurrentSymbolIndex + 1]?.symbol;
         let inputSymbol; 
 
         if (input === (pow_10 - pow_1)) {
@@ -106,7 +105,6 @@ const calculatorLogic = (() => {
 
 
     function toRepeatSymbols (symbol,iterations,iterationBegin) {
-        console.log(symbol,iterations,iterationBegin);
         let inputSymbol = '';
         for (let i = iterationBegin; i < iterations; i++) {
             inputSymbol += symbol;
@@ -122,6 +120,14 @@ const calculatorLogic = (() => {
 const UImanipulation = (() => {
 
     function outputFn (decimal,roman) {
+        if (/^Please/g.test(roman)) {
+            document.getElementById('input').classList.add('invalid');
+            document.getElementById('output').classList.add('invalid');
+        }
+        else {
+            document.getElementById('input').classList.remove('invalid');
+            document.getElementById('output').classList.remove('invalid');
+        }
         input_output.splice(0);
         input_output.push(decimal,roman);
         document.getElementById('input').innerText = input_output[0];
@@ -131,7 +137,7 @@ const UImanipulation = (() => {
 
     function storage () {
         const data = JSON.stringify(input_output);
-        localStorage.setItem('data',data);
+        localStorage.setItem('decimal_to_roman_data',data);
     }
 
     function retrieve () {
@@ -156,8 +162,3 @@ document.getElementById('convert-btn').addEventListener('click', (e) => {
     inputDom.value = '';
 });
 
-// document.addEventListener('keyup',() => {
-//     if (!inputDom.value) {
-//         input
-//     }
-// })

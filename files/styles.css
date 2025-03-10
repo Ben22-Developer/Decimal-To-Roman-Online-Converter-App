@@ -1,5 +1,5 @@
 * {
-    padding: 0;
+    padding: 0; 
     margin: 0;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -29,54 +29,63 @@ section {
     display: flex;
     flex-direction: column;
     gap:2rem;
-    h1 {
-        padding: 0 1rem;
-        text-decoration: underline;
-    }
-    form {
-        fieldset {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap:2rem;
-            padding: 1rem 0;
-            margin: 0 .5rem 1rem .5rem; 
-            input[type="number"] {
-                height: 2.5rem;
-                width: 75%;
-                font-size: 2rem;
-            }
-            input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
-                display: none;
-            }
-        }
-        input[type="button"] {
-            cursor: pointer;
-            padding: .5rem 1rem;
-            font-weight: bold;
-            font-size: 1rem;
-            border: 2px solid var(--light-color);
-        }
-        input[type="button"]:hover {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-        }
-        input[type="button"]:active {
-            background-color: var(--light-color);
-            color: var(--dark-color);
-        }
-    }
-    table {
-        margin: 0 .5rem;
-    }
-    td,th {
-        padding: .5rem 0;
-    }
-    table,td,th {
-        border: .1rem solid;
-        border-collapse: collapse;
-    }
 }
+
+h1 {
+    padding: 0 1rem;
+    text-decoration: underline;
+}
+
+#input_fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+    padding: 1rem 0;
+    margin: 0 .5rem 1rem .5rem; 
+}
+
+input[type="number"] {
+    height: 2.5rem;
+    width: 75%;
+    font-size: 2rem;
+}
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}
+    
+input[type="button"] {
+    cursor: pointer;
+    padding: .5rem 1rem;
+    font-weight: bold;
+    font-size: 1rem;
+    border: 2px solid var(--light-color);
+}
+input[type="button"]:hover {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+}
+input[type="button"]:active {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+table {
+    margin: 0 .5rem;
+}
+td,th {
+    padding: .5rem 0;
+    height: 2rem;
+}
+table,td,th {
+    border: .1rem solid;
+    border-collapse: collapse;
+}
+.invalid{
+    border: 3px solid red;
+    background-color: brown;
+}
+
 
 div:nth-of-type(1) {
     grid-column: 1/2;
